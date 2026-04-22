@@ -15,10 +15,9 @@ repos:
   - repo: local
     hooks:
       - id: maven-checkstyle
-        name: Maven Checkstyle + Test
-        entry: bash -c 'xmllint --noout pom.xml && mvn -q org.apache.maven.plugins:maven-checkstyle-plugin:3.3.1:check -Dcheckstyle.config.location=config/checkstyle.xml -Dcheckstyle.suppressions.file=config/suppressions.xml -Dcheckstyle.includeTestSourceDirectory=true'
+        name: Maven Checkstyle
+        entry: bash -c 'xmllint --noout pom.xml && mvn -q org.apache.maven.plugins:maven-checkstyle-plugin:3.3.1:check -Dcheckstyle.config.location=file:$(pwd)/config/checkstyle.xml -Dcheckstyle.suppressions.location=file:$(pwd)/config/suppressions.xml -Dcheckstyle.includeTestSourceDirectory=true -Dcheckstyle.consoleOutput=true'
         language: system
-        types: [java]
         pass_filenames: false
         verbose: true
         stages: [pre-commit]
