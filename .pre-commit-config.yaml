@@ -6,19 +6,32 @@ repos:
       - id: end-of-file-fixer
       - id: detect-private-key
       - id: mixed-line-ending
-        args: ['--fix=lf']
+        args: ["--fix=lf"]
       - id: check-yaml
       - id: check-json
       - id: check-merge-conflict
       - id: check-added-large-files
+        args: ["--maxkb=500"]
 
   - repo: local
     hooks:
-      - id: maven-checkstyle
-        name: Maven Checkstyle + Test
-        entry: bash -c 'xmllint --noout pom.xml && mvn -q org.apache.maven.plugins:maven-checkstyle-plugin:3.3.1:check -Dcheckstyle.config.location=config/checkstyle.xml -Dcheckstyle.suppressions.file=config/suppressions.xml -Dcheckstyle.includeTestSourceDirectory=true'
+      - id: maven-checks
+        name: Maven Tests, Spotless (Auto-Fix), and Checkstyle
+        entry: bash -c './mvnw clean test spotless:apply checkstyle:check'
         language: system
         types: [java]
         pass_filenames: false
         verbose: true
         stages: [pre-commit]
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.2
+    hooks:
+      - id: gitleaks
+
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.1.0
+    hooks:
+      - id: commitizen
+        name: Validate commit message
+        stages: [commit-msg]
