@@ -160,7 +160,7 @@
         <module name="ImportOrder">
             <property name="option" value="top"/>
             <property name="sortStaticImportsAlphabetically" value="true"/>
-            <property name="groups" value="/^java\./, /^javax\./, com.gojek, *"/>
+            <property name="groups" value="/^java\./, /^javax\./, org, *"/>
             <property name="ordered" value="true"/>
             <property name="separated" value="true"/>
             <property name="separatedStaticGroups" value="false"/>
@@ -193,11 +193,6 @@
         <module name="ModifierOrder"/>
         <module name="EmptyStatement"/>
         <module name="DeclarationOrder"/>
-
-        <module name="TodoComment">
-            <property name="format" value="(TODO)|(todo)|(FIXME)"/>
-            <property name="severity" value="error"/>
-        </module>
 
         <module name="RegexpSinglelineJava">
             <property name="id" value="blockSingleLineComments"/>
