@@ -19,7 +19,6 @@ repos:
         name: Maven Tests, Spotless (Auto-Fix), and Checkstyle
         entry: bash -c './mvnw clean test spotless:apply checkstyle:check'
         language: system
-        types: [java]
         pass_filenames: false
         verbose: true
         stages: [pre-commit]
